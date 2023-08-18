@@ -17,18 +17,17 @@ public class Competition {
     private String id;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private List<Component> components;
-    private int totalVotersNumber;
-
+    private List<Competitor> competitors;
+    private int totalVoteCount;
 
     @Getter
     @Setter
     @AllArgsConstructor
-    @Document(collection = "Components")
-    static class Component{
+    @Document(collection = "competitors")
+    public static class Competitor {
         @Id
         private String id;
-        private String SingerId;
-        private int voteNumber;
+        private String singerId;
+        private int voteCount;
     }
 }
