@@ -2,6 +2,7 @@ package com.example.votingapplication.Models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,6 +24,7 @@ public class Competition {
     @Getter
     @Setter
     @AllArgsConstructor
+    @NoArgsConstructor
     @Document(collection = "competitors")
     public static class Competitor {
         @Id

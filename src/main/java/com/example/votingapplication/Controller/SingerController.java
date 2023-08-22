@@ -1,16 +1,12 @@
 package com.example.votingapplication.Controller;
 
-import com.example.votingapplication.Models.Competition;
 import com.example.votingapplication.Models.Singer;
-import com.example.votingapplication.Service.CompetitionService;
 import com.example.votingapplication.Service.SingerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/votes")
+@RequestMapping("/singers")
 public class SingerController {
     private final SingerService singerService;
 
@@ -19,8 +15,8 @@ public class SingerController {
         this.singerService = singerService;
     }
 
-    @PostMapping
-    public void addSinger(@RequestBody Singer singer) {
-        singerService.addSinger(singer);
+    @PostMapping("/add")
+    public Singer addSinger(@RequestBody Singer singer) {
+        return singerService.addSinger(singer);
     }
 }

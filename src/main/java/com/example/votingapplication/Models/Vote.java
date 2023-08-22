@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 public class Vote {
     @Id
     private String id;
-    private String userEmail;    // voter email
-    private String singerId;  // Vote for singer id
-    private String competitionId;  // competition id
-    private LocalDateTime timestamp;   // timestamp of the vote
+    private String userEmail;           // voter email
+    private String singerId;            // Vote for singer id
+    private String competitionId;       // competition id
+    private LocalDateTime timestamp;    // timestamp of the vote
 }
