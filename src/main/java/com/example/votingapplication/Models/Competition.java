@@ -20,6 +20,7 @@ public class Competition {
     private LocalDateTime endDateTime;
     private List<Competitor> competitors;
     private int totalVoteCount;
+    private Boolean isFinished;
 
     @Getter
     @Setter

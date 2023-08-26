@@ -6,9 +6,13 @@ import com.example.votingapplication.Repository.CompetitionRepository;
 import com.example.votingapplication.Repository.VoteRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,13 +21,29 @@ import java.util.Optional;
 public class VoteService {
     private final VoteRepository voteRepository;
     private final CompetitionRepository competitionRepository;
+    private MongoTemplate mongoTemplate;
 
-    @Autowired
     public VoteService(
             VoteRepository voteRepository,
-            CompetitionRepository competitionRepository) {
+            CompetitionRepository competitionRepository,
+            MongoTemplate mongoTemplate
+            ) {
         this.voteRepository = voteRepository;
         this.competitionRepository = competitionRepository;
+        this.mongoTemplate = mongoTemplate;
+    }
+
+    public List<String> getAllVoterEmailsByCompetitionId(String competitionId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("competitionId").is(competitionId));
+
+        List<Vote> votes = mongoTemplate.find(query, Vote.class);
+
+        List<String> voterEmails = new ArrayList<>();
+        for (Vote vote : votes) {
+            voterEmails.add(vote.getUserEmail());
+        }
+        return voterEmails;
     }
 
     public Competition submitVote(Vote vote) {
@@ -51,7 +71,7 @@ public class VoteService {
             Competition competition = competitionOptional.get();
 
             // check if competition still available
-            System.out.println(vote.getTimestamp().isBefore(competition.getStartDateTime()) + "   " + vote.getTimestamp().isAfter(competition.getEndDateTime()));
+            //System.out.println(vote.getTimestamp().isBefore(competition.getStartDateTime()) + "   " + vote.getTimestamp().isAfter(competition.getEndDateTime()));
             if(vote.getTimestamp().isBefore(competition.getStartDateTime()) || vote.getTimestamp().isAfter(competition.getEndDateTime())) {
                 throw new IllegalArgumentException("Competition not available.");
             }
