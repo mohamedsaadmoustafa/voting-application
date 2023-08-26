@@ -1,30 +1,23 @@
 *Database Schema:*
 
-1. *User Collection:*
-    - `_id` (Primary Key)
-    - `username` (String, unique)
-    - `password` (String, hashed)
-    - `votedSingerId` (String, optional, stores the singer ID the user voted for)
-    - `votedAt` (Date, stores the timestamp when the user voted)
-
-2. *Singer Collection:*
+1. *Singer Collection:*
     - `_id` (Primary Key)
     - `name` (String, unique)
 
-3. *Vote Collection:*
+2. *Vote Collection:*
     - `_id` (Primary Key)
     - `userId` (Reference to User Collection)
     - `singerId` (Reference to Singer Collection)
     - `votedAt` (Date, stores the timestamp when the vote was cast)
 
-4. *Competition Collection:*
+3. *Competition Collection:*
    - `_id` (Primary Key)
    - `_startDateTime` (startDateTime)
    - `_endDateTime` (endDateTime )
    - `competitors` (List<Competitor>)
    - `voteCount` (Number, stores the total votes)
    
-5. *Competitor Collection:*
+4. *Competitor Collection:*
     - `_id` (Primary Key)
     - `singerId` (String, unique)
     - `voteCount` (Number, stores the total votes received by the singer)
