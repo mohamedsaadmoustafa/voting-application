@@ -75,12 +75,19 @@ This document summarizes the APIs that are available for the Voting App.
 This endpoint is used to add a new singer.
 
 HTTP Method: POST
+
 Parameters:
+
 name: The name of the singer.
+
 Response:
+
 201: The singer was added successfully.
+
 400: The request was invalid.
+
 401: The user is not authorized to add a singer.
+
 403: The user does not have enough permissions to add a singer.
 
 
@@ -89,14 +96,23 @@ Response:
 This endpoint is used to add a new competition.
 
 HTTP Method: POST
+
 Parameters:
+
 startDateTime: The start date and time of the competition.
+
 endDateTime: The end date and time of the competition.
+
 competitors: An array of objects that each represent a competitor in the competition. Each competitor object must have a singerId property that specifies the ID of the singer who is competing.
+
 Response:
+
 201: The competition was added successfully.
+
 400: The request was invalid.
+
 401: The user is not authorized to add a competition.
+
 403: The user does not have enough permissions to add a competition.
 
 
@@ -104,15 +120,25 @@ Response:
 This endpoint is used to cast a vote for a singer in a competition.
 
 HTTP Method: POST
+
 Parameters:
+
 userEmail: The email address of the user who is casting the vote.
+
 singerId: The ID of the singer who is being voted for.
+
 competitionId: The ID of the competition in which the vote is being cast.
+
 timestamp: The timestamp of the vote.
+
 Response:
+
 201: The vote was cast successfully.
+
 400: The request was invalid.
+
 401: The user is not authorized to cast a vote.
+
 403: The user does not have enough permissions to cast a vote.
 
 
@@ -120,10 +146,17 @@ Response:
 This endpoint is used to get the result of a competition.
 
 HTTP Method: GET
+
 Parameters:
+
 competition_id: The ID of the competition whose result is being requested.
+
 Response:
+
 200: The result of the competition was returned successfully.
+
 400: The request was invalid.
+
 401: The user is not authorized to get the result of a competition.
+
 403: The user does not have enough permissions to get the result of a competition.
