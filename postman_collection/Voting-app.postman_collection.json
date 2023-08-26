@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "f5f00a81-ede7-4de0-867f-a303bde173d5",
+		"name": "Voting-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25361597"
+	},
+	"item": [
+		{
+			"name": "add singer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Save busId to environment variable\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.environment.set(\"singer_1_id\", responseJson.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"name_example2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:7070/singers/add",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"singers",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add competition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Save busId to environment variable\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.environment.set(\"competition_id\", responseJson.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"startDateTime\": \"2022-12-31T18:00:00\",\r\n  \"endDateTime\": \"2023-12-07T18:00:00\",\r\n  \"competitors\": [\r\n    {\r\n      \"singerId\": \"{{singer_1_id}}\"\r\n    },\r\n    {\r\n      \"singerId\": \"{{singer_2_id}}\"\r\n    }\r\n  ],\r\n  \"totalVoteCount\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:7070/competitions/add",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"competitions",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add vote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userEmail\": \"user4@example.com\",\r\n  \"singerId\": \"{{singer_1_id}}\",\r\n  \"competitionId\": \"{{competition_id}}\",\r\n  \"timestamp\": \"2023-12-18T18:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:7070/votes/vote",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"votes",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Result by competition id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "user2@example.com",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:7070/competitions/result/{{competition_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"competitions",
+						"result",
+						"{{competition_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
